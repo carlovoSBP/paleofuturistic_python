@@ -142,16 +142,17 @@
 <ul>
 <li>Go to the command-line in your local clone of your project.</li>
 <li>Execute <code>uvx cruft update</code>.</li>
-<li>The steps after that should be self-explanatory, but there is always <a href="https://cruft.github.io/cruft/#updating-a-project">more information available dor those who want</a>.</li>
+<li>The steps after that should be self-explanatory, but there is always <a href="https://cruft.github.io/cruft/#updating-a-project">more information available for those who want</a>.</li>
 </ul>
 <h2 id="github-security-enhancements">GitHub security enhancements</h2>
 <p>Note you have just bestowed great power upon GitHub.
 With great power comes... No wait we have something serious to say here!</p>
-<p>If you followed the guides linked above you will have already setup a separate GitHub env for publishing and made use of PyPI's trusted publishing.
+<p>If you followed the complete walkthrough from this template you will have already setup a separate GitHub env for publishing and made use of PyPI's trusted publishing.
 That's great, but it's advisable to put up an even higher fence against attacks.</p>
 <p>You can for example use the following settings to protect your repository from outsiders:</p>
 <ul>
 <li>Protect at least the <code>main</code> branch and <code>v*</code> tags with rulesets; configure them to enforce updates via peer-reviewed pull requests from forks.</li>
+<li>Edit the <code>pypi</code> environment so that only the protected branches and tags can use it.</li>
 <li>Enable "Limit to users explicitly granted read or higher access" under "Code review limits".</li>
 <li>Set "Require approval for all external contributors" under "Actions permissions" -&gt; "Approval for running fork pull request workflows from contributors".</li>
 <li>Set "Read repository contents and packages permissions" (no default repo write) under "Actions permissions" -&gt; "Workflow permissions".</li>
@@ -164,11 +165,14 @@ That's great, but it's advisable to put up an even higher fence against attacks.
 <li>Cumbersome to implement, but effective: org/repo admin access only for non-personal accounts which require 4-eyes approval for assuming.</li>
 </ul>
 <h2 id="executable-apps">Executable apps</h2>
+<blockquote>
+<p>You may need to flush uv's cache after implementing the code below before the commands will work.</p>
+</blockquote>
 <p>This workflow template was created for libraries, because those are usually the most involved to get going.
 Making the template able to produce Python apps is not much work luckily.
 (Making stand-alone apps is a whole other story though!
 In that case you may want to look at <a href="https://pyinstaller.org/">PyInstaller</a> or <a href="https://nuitka.net/">Nuitka</a> for example.)</p>
-<p>To make the package an executable module that supports something like <code>python -m &lt;YOUR_PROJECT_SLUG&gt;</code> (or <code>uv run --isolated --no-project --with &lt;YOUR_PROJECT_SLUG&gt; python -m &lt;YOUR_PROJECT_SLUG&gt;</code>) create a <code>__main__.py</code> that looks something like:</p>
+<p>To make the package an executable module that supports something like <code>uv run python -m &lt;YOUR_PROJECT_SLUG&gt;</code> create a <code>src/&lt;YOUR_PROJECT_SLUG&gt;/__main__.py</code> that looks something like:</p>
 <pre><code class="language-Python">from &lt;YOUR_PROJECT_SLUG&gt; import hello
 
 
@@ -179,10 +183,12 @@ def main() -&gt; None:
 if __name__ == &quot;__main__&quot;:
     main()
 </code></pre>
-<p>Then to make tools like uvx and pipx be able to execute the module like so <code>uvx --with &lt;YOUR_PROJECT_SLUG&gt;</code> add the following to the <code>pyproject.toml</code>.</p>
+<p>Then to make tools like uvx and pipx be able to execute the module like so <code>uvx --with-editable . &lt;YOUR_PROJECT_SLUG&gt;</code> add the following to the <code>pyproject.toml</code>.</p>
 <pre><code class="language-toml">[project.scripts]
 &lt;YOUR_PROJECT_SLUG&gt; = &quot;&lt;YOUR_PROJECT_SLUG&gt;.__main__:main&quot;
 </code></pre>
+<p>After publishing your package to PyPI a simple <code>uvx &lt;YOUR_PROJECT_SLUG&gt;</code> should do.
+(And <code>uv run --isolated --no-project --with &lt;YOUR_PROJECT_SLUG&gt; python -m &lt;YOUR_PROJECT_SLUG&gt;</code> coming back to the example above.)</p>
 <p>If you are setting out to build an app, you can implement all the boilerplate yourself with <code>os</code> and <code>argparse</code>.
 You could also look into available frameworks, for example for CLIs: <a href="https://typer.tiangolo.com/">Typer</a>.</p></div>
             </div>

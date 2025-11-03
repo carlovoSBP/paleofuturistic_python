@@ -164,7 +164,7 @@ While doing so we will do all the steps you would normally do during a feature d
 Also, we will publish the project's documentation to GitHub Pages.</p>
 <p>You are encouraged to go through this walkthrough twice.
 Upon first run, only execute the instructions and ignore all the explanations underneath.
-Then reread this page in full to get a better grasp of what this template is setting you up for you.</p>
+Then reread this page in full to get a better grasp of what this template is setting up for you.</p>
 <h2 id="initializing-your-project">Initializing your project</h2>
 <p>Instructions:</p>
 <ul>
@@ -180,11 +180,11 @@ Then reread this page in full to get a better grasp of what this template is set
 </ul>
 <h3 id="managing-boilerplate">Managing boilerplate</h3>
 <p><a href="https://cruft.github.io/cruft/">cruft</a> (<a href="https://cookiecutter.readthedocs.io/en/stable/">cookiecutter</a> under its hood) is a tool for managing boilerplate.
-Like you did, new projects can be instantiated from a template with it.
+New projects can be instantiated from a template with it, like you did above.
 An even more amazing function is that it can update a project's boilerplate when the template changes (also this Paleofuturistic one!).
 See the <a href="../extra_guides/#update-your-paleofuturistic-boilerplate">extra guides</a> for more information on that.</p>
 <p>It might still be noteworthy to point out a few things in the command you used:
-<code>uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python</code>
+<code>uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python</code>.
 The <code>--checkout latest</code> in there should speak for itself.
 Now mind the <code>-f</code>.
 cruft does not allow editing an existing directory by default for safety.
@@ -201,8 +201,8 @@ Maybe take a look at the .gitignore, maybe not; it's fine; I promise.</p>
 <p>Instructions:</p>
 <ul>
 <li>Get back to the command-line in your local clone.</li>
-<li>Execute: <code>uv sync --all-extras --dev</code>.</li>
-<li>Execute: <code>git add --all</code>, <code>git commit -m "lock initial dependencies"</code> and <code>git push</code>.</li>
+<li>Execute <code>uv sync --all-extras --dev</code>.</li>
+<li>Execute <code>git add --all</code>, <code>git commit -m "lock initial dependencies"</code> and <code>git push</code>.</li>
 <li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions</code>.</li>
 <li>See that the quality assurance CI now succeeds; what it's exactly doing, you will find out in the next instructions.</li>
 </ul>
@@ -217,7 +217,7 @@ For starters just adding some dependencies from PyPI is probably all you want.
 All the other things you would want from (uv's) dependency management you can always look into later.</p>
 <p>By now you might have already guessed that uv acts on dependencies in your environment and uvx is meant for tools that live outside of it.</p>
 <blockquote>
-<p>A reminder: add the names of the public features you develop to the <code>__all__</code> list in <code>__init__.py</code>.
+<p>A reminder: add the names of the public features you develop to the <code>__all__</code> list in <code>src/&lt;YOUR_PROJECT_SLUG&gt;/__init__.py</code>.
 This way others (that includes your unittest runs) can conveniently access them upon importing your module.</p>
 </blockquote>
 <h2 id="quality-assurance">Quality assurance</h2>
@@ -234,10 +234,10 @@ This way others (that includes your unittest runs) can conveniently access them 
 <p>The steps above are the minimal steps to assure quality in any software project.
 When they output that everything is as expected, they should also leave the codebase unchanged.
 The dependencies for these steps are pinned in the <code>pyproject.toml</code> to make sure they run the same way locally as in the pipeline.
-The pipeline can run quite quick upon repetition, because caching is enabled, see <code>.github/workflows/quality_assurance.yaml</code>.</p>
+The pipeline can run quite quickly upon repetition, because caching is enabled, see <code>.github/workflows/quality_assurance.yaml</code>.</p>
 <p>Formatting (<code>uv run ruff format --diff</code>), type checking (<code>uv run mypy</code>) and testing (<code>uv run python -m unittest</code>) should speak for themselves.
 The ruff formatter, mypy and Python's build-in testing library are ubiquitous and easy to use.
-Only mypy has a minimal amount of config in the <code>pyproject.toml</code> that make it a bit more specific and tight.</p>
+Only mypy has a minimal amount of config in the <code>pyproject.toml</code> that makes it a bit more specific and tight.</p>
 <p>You can get into the weeds very fast with linting (<code>uv run ruff check</code>) though.
 If you go with the flow of this template it's probably going to work out fine for your first 1,000 commits or so.
 And by that time you can probably figure out how to stop a pesky linter from undoing your intricacies,

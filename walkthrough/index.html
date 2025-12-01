@@ -160,7 +160,7 @@
 <p>Some things in <a href="../#usage">usage</a> might require a little more effort on the first run.
 Let's go over the bootstrapping and the development cycle in full detail.</p>
 <p>In this walkthrough we are going to create a Python library and publish it to PyPI.
-While doing so we will do all the steps you would normally do during a feature development as well.
+While doing so we will do all the steps you would normally do during feature development as well.
 Also, we will publish the project's documentation to GitHub Pages.</p>
 <p>You are encouraged to go through this walkthrough twice.
 Upon first run, only execute the instructions and ignore all the explanations underneath.
@@ -242,7 +242,7 @@ Also, the activated linting rules are a little more than the default, mainly bec
 <p>Instructions:</p>
 <ul>
 <li>Execute <code>uv build</code>;
-  gives multiline output, should end with <code>Successfully built dist/&lt;YOUR_PROJECT_SLUG&gt;-0.1.0-py3-none-any.whl</code>.</li>
+  gives multiline output, should end with <code>Successfully built dist/&lt;YOUR_PROJECT_SLUG&gt;-0.0.0-py3-none-any.whl</code>.</li>
 <li>Execute <code>git status</code>;
   gives multiline output, should end with <code>nothing to commit, working tree clean</code>.</li>
 </ul>
@@ -285,13 +285,16 @@ Others might particularly like automated publishing to other documentation hosti
 <ul>
 <li>Navigate to <code>https://github.com/settings/personal-access-tokens</code>.</li>
 <li>Generate a new token;
-  it should have <code>Read access to metadata</code> and <code>Read and Write access to code and pull requests</code> on ONLY the repository you are working with now.</li>
-<li>Navigate to <code>https://github.com/carlovoSBP/cvo251102app/settings/secrets/actions/new</code>.</li>
+  it should have access "Read and Write" on "Contents" and "Pull requests" on ONLY the repository you are working with now,
+  this will also automatically grant access "Read-only" on "Metadata".</li>
+<li>Go to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/settings/secrets/actions/new</code>.</li>
 <li>Set <code>RELEASE_PLEASE_TOKEN</code> as Name and the token you just generated as Secret, and click <code>Add secret</code>.</li>
 <li>Get back to the command-line in your local clone.</li>
-<li>Execute <code>git push</code>.</li>
-<li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions</code>.</li>
-<li>See that the Quality Assurance CI and Release Please workflows succeed.</li>
+<li>Execute <code>git commit --allow-empty -m "feat: release initial version"</code> and <code>git push</code>.</li>
+<li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions</code>;
+  see that the Quality Assurance CI and Release Please workflows succeed.</li>
+<li>Go to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/pull/1</code>;
+  see that Release Please created a pull request for you.</li>
 </ul>
 <h3 id="release-orchestration">Release orchestration</h3>
 <p>The quality assurance was already covered above.
@@ -317,13 +320,13 @@ See the <a href="../extra_guides/#github-security-enhancements">extra guides</a>
   if you have no account there, create one first.</li>
 <li>Configure a <a href="https://docs.pypi.org/trusted-publishers/adding-a-publisher/">trusted publisher</a>.</li>
 <li>Go to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/pull/1</code> and approve and (squash) merge the pull request.</li>
-<li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions</code>;
+<li>Go to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/actions</code>;
   a GitHub Action should be running to create a GitHub release.</li>
 <li>Wait for the workflows to finish, then two other GitHub workflows should spawn triggered by the creation the release;
   these actions should publish you package to PyPI and prepare your documentation for publishing to GitHub Pages respectively;
   the latter action should spawn another workflow that actually publishes your docs on GitHub Pages.</li>
 <li>Wait until all actions finish.</li>
-<li>Navigate to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/releases</code>;
+<li>Go to <code>https://github.com/&lt;YOUR_GITHUB_HANDLE&gt;/&lt;YOUR_PROJECT_SLUG&gt;/releases</code>;
   note that a release has been created.</li>
 <li>Get back to the command-line in your local clone.</li>
 <li>Execute <code>git pull</code>;

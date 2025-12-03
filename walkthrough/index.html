@@ -171,7 +171,7 @@ Then reread this page in full to get a better grasp of what this template is set
 <li>Create a repository in GitHub;
   do not add any additional files upon creation, like .gitignore, LICENSE etc.;
   make sure you take a project name not already on PyPI, if you want to follow this walkthrough all the way to publishing there;
-  make sure you make the repo public if you want to, if you want to follow this walkthrough all the way to publishing the documentation on GitHub Pages.</li>
+  make sure you make the repo public, if you want to follow this walkthrough all the way to publishing the documentation on GitHub Pages.</li>
 <li>Clone the repo to your development environment.</li>
 <li>Execute this command from the directory directly above: <code>uvx cruft create -f --checkout latest https://github.com/schubergphilis/paleofuturistic_python</code>.</li>
 <li>Answer the questions; <code>project_slug</code> should be the same as the GitHub repository name you chose.</li>
@@ -180,7 +180,7 @@ Then reread this page in full to get a better grasp of what this template is set
   this gives multiline output and should state something about having downloaded and installed a lot of packages successfully.</li>
 <li>Execute <code>git add --all</code> and <code>git commit -m "chore: lock initial dependencies"</code>.</li>
 <li>Do not git push yet!
-  This would trigger CI which we will come back to later.</li>
+  This would trigger CI which we will cover later.</li>
 </ul>
 <h3 id="managing-boilerplate">Managing boilerplate</h3>
 <p><a href="https://cruft.github.io/cruft/">cruft</a> (<a href="https://cookiecutter.readthedocs.io/en/stable/">cookiecutter</a> under its hood) is a tool for managing boilerplate.
@@ -237,7 +237,7 @@ If you go with the flow of this template it's probably going to work out fine fo
 And by that time you can probably figure out how to stop a pesky linter from undoing your intricacies,
 so my advice would be to not give it too much thought.
 (If you feel like getting into the weeds early though, <a href="https://docs.astral.sh/ruff/configuration/">have at you</a>.)</p>
-<p>Small thing worth mentioning is that the <code>pyproject.toml</code> is setup such that the ruff linter and formatter should not contradict each other.
+<p>Small thing worth mentioning is that the <code>pyproject.toml</code> is set up such that the ruff linter and formatter should not contradict each other.
 Also, the activated linting rules are a little more than the default, mainly because isort is really convenient.</p>
 <h2 id="building-your-package">Building your package</h2>
 <p>Instructions:</p>

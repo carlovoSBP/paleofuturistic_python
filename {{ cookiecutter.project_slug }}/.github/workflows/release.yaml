@@ -56,7 +56,7 @@ jobs:
 
       - name: Publish package
         run: uv publish
-        {%- if cookiecutter.use_trusted_publishing == "false" %}
+        {%- if not cookiecutter.use_trusted_publishing %}
         env:
           UV_PUBLISH_USERNAME: ${{ secrets.UV_PUBLISH_USERNAME }}
           UV_PUBLISH_PASSWORD: ${{ secrets.UV_PUBLISH_PASSWORD }}

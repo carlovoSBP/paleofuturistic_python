@@ -57,11 +57,11 @@ jobs:
       - name: Publish package
         run: uv publish
         {%- if not cookiecutter.use_trusted_publishing %}
-        {% raw %}
+        {%- raw %}
         env:
           UV_PUBLISH_USERNAME: ${{ secrets.UV_PUBLISH_USERNAME }}
           UV_PUBLISH_PASSWORD: ${{ secrets.UV_PUBLISH_PASSWORD }}
-        {% endraw %}
+        {%- endraw %}
         {%- endif %}
 
   publish-docs:
